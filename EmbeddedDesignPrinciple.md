@@ -53,3 +53,12 @@ https://gist.github.com/oschmid/3ee4c21525ef9082390ba469c897d7cf
 1. TODO
 1. TODO
 1. TODO
+
+## Optional: Hidden Coupling Drill
+
+1. TODO
+1. 
+   1. 8 is coupled to the length of `str`
+   1. This is hidden coupling
+   1. It can be removed by replacing 8 with `strlen(str)`
+1. TODO
