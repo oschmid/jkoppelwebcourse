@@ -86,6 +86,37 @@ https://gist.github.com/oschmid/3ee4c21525ef9082390ba469c897d7cf
    1. n/a
 1. 
    1. 8 is coupled to the length of `str`
-   1. This is hidden coupling
+   1. Hidden
    1. It can be removed by replacing 8 with `strlen(str)`
-1. TODO
+1. 
+   1. That the length of players is 2
+   1. Hidden
+   1. It can be removed by replacing `i < 2` with `i < game.players.length`
+1. 
+   1. That the `days` default value is the same as the comment
+   1. Hidden
+   1. The comment `# Do 90 days of history by default` can be removed
+1. 
+   1. Both classes are coupled to the name of the log file `"log.txt"`
+   1. Hidden
+   1. Each `"log.txt"` could be replaced with the same static variable `LOG_FILE`
+1. 
+   1. Client and server are coupled to the use of "username" and "password"
+   1. Hidden
+   1. Not possible to remove this for forms
+1. 
+   1. Both are coupled to the file path
+   1. Hidden
+   1. Could replace with `openFile(MONSTER1_GIF)` and `openFile(FIREBALL_GIF)`
+1. 
+   1. GraphicsProgram is coupled to the types of different shapes
+   1. Hidden
+   1. All shapes could inherit from a `Shape` class that has an abstract `getArea()` method
+1. 
+   1. The length and order of `recipeNames` and `recipeTypes` are coupled
+   1. Hidden
+   1. Replace both arrays with a `Recipe[]` where Recipe is a class that has name and type fields
+
+### Mini-Case Study: The X Macro Trick (optional)
+
+TODO
