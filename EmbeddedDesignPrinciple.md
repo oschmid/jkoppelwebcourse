@@ -74,13 +74,16 @@ https://gist.github.com/oschmid/3ee4c21525ef9082390ba469c897d7cf
             else
                msg[name] = ', '.join(str(v) for v in value
       ```
-1. TODO
-1. TODO
-1. TODO
+1. TODO find another design-level concept
+1. TODO find 2 violations of the representable/valid principle
+1. TODO reflect on how I would have refactored this before taking the course
 
 ## Optional: Hidden Coupling Drill
 
-1. TODO
+1. 
+   1. bar()
+   1. Visible
+   1. n/a
 1. 
    1. 8 is coupled to the length of `str`
    1. This is hidden coupling
