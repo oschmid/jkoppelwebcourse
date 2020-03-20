@@ -5,7 +5,9 @@ Limit the number of states and state transitions to the minimum number necessary
 
 ## Bugs and Battleships
 
-TODO
+TODO For fizzbuzz this would be multiples of 3, multiples of 5, multiples of both 3 and 5, multiples of neither?
+
+TODO Changes to the design that increase the state space may split test cases?
 
 ## The Most Dangerous Code in the World
 
