@@ -95,29 +95,29 @@ end
 ## Optional: Code vs Logical Correctness
 
 1. 30 or 31
-1. If we call sieve(6), then sieve(-5), and finally sieve(5), sieve will incorrectly return 3 instead of 2. Adding a precondition to sieve that n>0
+1. If we call sieve(6), then sieve(-5), and finally sieve(5), sieve will incorrectly return 3 instead of 2. We can stop this by adding a precondition to sieve that n>0.
 1. 
-```
-void sieve(int n) {
-    // {n>0}
-    int *mem = (int*)malloc(sizeof(int)*n); // assume no overflow
-    // {forall k, (k>=0 && k<n)=>mem[k]==0}
-    int count = 0
-    // {count=0}
-    for (int d=2; d<n; d++) {
-        // TODO
-        if(mem[d]==0) count++;
-        for(int j=d; j<n; j+=d) {
-            mem[j]=1;
+    ```
+    void sieve(int n) {
+        // {n>0}
+        int *mem = (int*)malloc(sizeof(int)*n); // assume no overflow
+        // 
+        int count = 0
+        // {count=0, forall k, (k>=0 && k<n) => mem[k]==0}
+        for (int d=2; d<n; d++) {
+            // TODO
+            if(mem[d]==0) count++;
+            for(int j=d; j<n; j+=d) {
+                mem[j]=1;
+            }
+            // 
+            free(mem);
         }
         // 
-        free(mem);
+        printf(“%d\n”, count);
+        // { count is the number of primes < n, count has been printed }
     }
-    // 
-    printf(“%d\n”, count);
-    // { count is the number of primes < n, count has been printed }
-}
-```
+    ```
 
 ## Optional Case Study: Android Main Thread
 
@@ -149,10 +149,13 @@ void sieve(int n) {
    ```
    Callers of these methods also get a postcondition that an exception is thrown if isMainThread is not the expected value. All transitive callers should also get a postcondition that they can terminate with a thrown exception. Catching that exception would be a way of learning the value of isMainThread.
 1. They know that Looper has up to 2 threads and if it has only one then we’re on the main thread.
-1. A boolean method Looper.isOnMainThread()?
+1. A boolean method `Looper.isOnMainThread()`?
 1. TODO
+   1. Looper would need to add a `setMainThread(thread)` method. This would be a fairly easy change though adds a lot of complexity to possible code.
+   1. TODO (Significant challenge for the Android team. Users may need to do work to eliminate unnecessary thread handling.)
+   1. TODO 
 1. TODO
-1. Apps must check for which thread they’re on before doing GUI actions, or when starting long running processes. If they’re not on the expected thread they also have to handle communicating with the main thread. TODO complexity?
+1. Apps must check for which thread they’re on before doing GUI actions, or when starting long running processes. If they’re not on the expected thread they also have to handle communicating with the main thread. In terms of Hoare logic, all parts of the app must concern themselves with `isMainThread` on top of any existing state.
 
 ## Optional: The DIF Model of Bugs
 
