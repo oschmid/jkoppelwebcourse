@@ -18,7 +18,7 @@ https://gist.github.com/oschmid/3ee4c21525ef9082390ba469c897d7cf
 
 ## Case Study: Django Email Subsystem
 
-1. There is hidden coupling in the format of the message footer. Changing the message format requires knowing each of the locations messages can be written. To eliminate that a single message wrapper class (or function) should be created to deduplicate writing message bytes to a stream.
+1. There is hidden coupling in the format of the message footer. Changing the message format requires knowing each of the locations messages can be written. To eliminate that I would create a single message wrapper class (or function) to deduplicate writing message bytes to a stream.
 1.
    1. try/except block with a conditional raise.
    1. TODO
@@ -73,10 +73,17 @@ https://gist.github.com/oschmid/3ee4c21525ef9082390ba469c897d7cf
                msg[name] = value
             else
                msg[name] = ', '.join(str(v) for v in value
+      
+      // if we still want the convenience of being able to access the to and other headers as fields
+      // we can add getters/setters:
+      def to(self, to):
+         if to:
+            self.headers['to'] = to
+         return self.headers['to']
       ```
-1. TODO find another design-level concept
-1. TODO find 2 violations of the representable/valid principle
-1. TODO reflect on how I would have refactored this before taking the course
+1. Emails are strings for which `sanitize_address` is called in multiple places. [sanitize_address](https://github.com/django/django/blob/65e86948b80262574058a94ccaae3a9b59c3faea/django/core/mail/message.py) even converts it to a more specific `Address` type before converting it back to string.
+1. There's no validation that 'Subject' is a string and not a list of strings. All of the basic headers can be defined in either a constructor argument or in the extra headers dictionary and result in the same email.
+1. I would have kept all the existing constructor arguments and refactored only the internal structure thinking it a convenience rather than a confusion to have named arguments as well as a headers dictionary.
 
 ## Optional: Hidden Coupling Drill
 
