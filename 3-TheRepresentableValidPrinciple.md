@@ -39,12 +39,12 @@ TODO
 
     class InProgressGame {
       Either<InProgressGame, FinishedGame> move(Player, Position)
-      Either<InProgressGame, NewGame> takeMoveBack()
+      Either<InProgressGame, NewGame> takeMoveBack(Position)
       boolean isPositionOccupied(Position)
     }
 
     class FinishedGame {
-      Either<InProgressGame, NewGame> takeMoveBack()
+      Either<InProgressGame, NewGame> takeMoveBack(Position)
       boolean isPositionOccupied(Position)
       Result whoWonOrDraw()
     }
@@ -56,12 +56,11 @@ TODO
     class Draw implements Result {
     }
     
-    class TopLeft implements Position {}
-    class TopMiddle implements Position {}
-    class TopRight implements Position {}
-    class MiddleLeft implements Position {}
-    // ...
-    class BottomRight implements Position {}
+    enum Position {
+        TopLeft, TopMiddle, TopRight,
+        MiddleLeft, MiddleMiddle, MiddleRight,
+        BottomLeft, BottomMiddle, BottomRight
+    }
     ```
 1. 
     ```
@@ -72,7 +71,7 @@ TODO
     class InProgressGame:
       def move(self, player, position):
         // return either InProgressGame or FinishedGame
-      def takeMoveBack(self):
+      def takeMoveBack(self, position):
         // return either NewGame or InProgressGame
       def isPositionOccupied(self, position):
         // return boolean
@@ -93,6 +92,9 @@ TODO
     ```
 1. 
     ```
+    // we could get most of the safety by having 'isPositionOccupied()' return a token needed to for move() and 'takeMoveBack()'. The token would be of type Either<Occupied, Unoccupied> and move() would accept Unoccupied and takeMoveBack() would accept Occupied. Both token types have constructors private to the *Game types.
+    // but here's a more elaborate way of getting true compile time guarrantee
+    
     class NewGame {
     }
     
@@ -116,18 +118,27 @@ TODO
     class Draw implements Result {
     }
     
-    static Either<InProgressGame<Occupied, B, C, D, E, F, G, H, I>, FinishedGame moveA(Player, NewGame)
-    static Either<InProgressGame<A, Occupied, C, D, E, F, G, H, I>, FinishedGame moveA(Player, NewGame)
-    // repeat for moveC, moveD, ...
+    interface Position {}
     
-    static Either<InProgressGame<Occupied, B, C, D, E, F, G, H, I>, FinishedGame> moveA(Player,
+    class TopLeft implements Position {}
+    class TopMiddle implements Position {}
+    class TopRight implements Position {}
+    class MiddleLeft implements Position {}
+    // ...
+    class BottomRight implements Position {}
+    
+    static Either<InProgressGame<Occupied, B, C, D, E, F, G, H, I>, FinishedGame move(Player, TopLeft, NewGame)
+    static Either<InProgressGame<A, Occupied, C, D, E, F, G, H, I>, FinishedGame move(Player, TopMiddle, NewGame)
+    // repeat for TopRight, MiddleLeft, ...
+    
+    static Either<InProgressGame<Occupied, B, C, D, E, F, G, H, I>, FinishedGame> move(Player, TopLeft,
         InProgressGame<Unoccupied, B, C, D, E, F, G, H, I>)
-    // repeat for moveB, moveC, ...
+    // repeat for TopMiddle, TopRight, ...
     
-    static Either<InProgressGame<Unoccupied, B, C, D, E, F, G, H, I>, NewGame> moveA(Player,
+    static Either<InProgressGame<Unoccupied, B, C, D, E, F, G, H, I>, NewGame> takeMoveBack(TopLeft,
         InProgressGame<Occupied, B, C, D, E, F, G, H, I>)
-    // repeat for moveB, moveC, ...
+    // repeat for TopMiddle, TopRight, ...
     
-    static Either<InProgressGame<Unoccupied, B, C, D, E, F, G, H, I>, NewGame> moveA(Player, FinishedGame)
+    static Either<InProgressGame<Unoccupied, Occupied, Occupied, Occupied, Occupied, Occupied, Occupied, Occupied, Occupied>, NewGame> takeMoveBack(TopLeft, FinishedGame)
     // repeat for moveB, moveC, ...
     ```
