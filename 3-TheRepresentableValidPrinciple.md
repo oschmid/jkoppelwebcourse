@@ -55,6 +55,13 @@ TODO
 
     class Draw implements Result {
     }
+    
+    class TopLeft implements Position {}
+    class TopMiddle implements Position {}
+    class TopRight implements Position {}
+    class MiddleLeft implements Position {}
+    // ...
+    class BottomRight implements Position {}
     ```
 1. 
     ```
@@ -86,5 +93,41 @@ TODO
     ```
 1. 
     ```
-    TODO
+    class NewGame {
+    }
+    
+    class InProgressGame<A, B, C, D, E, F, G, H, I> { // where each extends IOccupied
+        boolean isPositionOccupied(Position)
+    }
+    
+    class Occupied implements IOccupied {}
+    
+    class Unoccupied implements IOccupied {}
+    
+    class FinishedGame {
+        boolean isPositionOccupied(Position)
+        Result whoWonOrDraw()
+    }
+
+    class PlayerWon implements Result {
+      Player player;
+    }
+
+    class Draw implements Result {
+    }
+    
+    static Either<InProgressGame<Occupied, B, C, D, E, F, G, H, I>, FinishedGame moveA(Player, NewGame)
+    static Either<InProgressGame<A, Occupied, C, D, E, F, G, H, I>, FinishedGame moveA(Player, NewGame)
+    // repeat for moveC, moveD, ...
+    
+    static Either<InProgressGame<Occupied, B, C, D, E, F, G, H, I>, FinishedGame> moveA(Player,
+        InProgressGame<Unoccupied, B, C, D, E, F, G, H, I>)
+    // repeat for moveB, moveC, ...
+    
+    static Either<InProgressGame<Unoccupied, B, C, D, E, F, G, H, I>, NewGame> moveA(Player,
+        InProgressGame<Occupied, B, C, D, E, F, G, H, I>)
+    // repeat for moveB, moveC, ...
+    
+    static Either<InProgressGame<Unoccupied, B, C, D, E, F, G, H, I>, NewGame> moveA(Player, FinishedGame)
+    // repeat for moveB, moveC, ...
     ```
