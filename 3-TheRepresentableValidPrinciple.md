@@ -31,27 +31,60 @@ TODO
 
 ### Exercise 2
 
-```
-class NewGame {
-  Either<InProgressGame, FinishedGame> move(Player, Position)
-}
+1. 
+    ```
+    class NewGame {
+      Either<InProgressGame, FinishedGame> move(Player, Position)
+    }
 
-class InProgressGame {
-  Either<InProgressGame, FinishedGame> move(Player, Position)
-  Either<InProgressGame, NewGame> takeMoveBack()
-  boolean isPositionOccupied(Position)
-}
+    class InProgressGame {
+      Either<InProgressGame, FinishedGame> move(Player, Position)
+      Either<InProgressGame, NewGame> takeMoveBack()
+      boolean isPositionOccupied(Position)
+    }
 
-class FinishedGame {
-  Either<InProgressGame, NewGame> takeMoveBack()
-  Result whoWonOrDraw()
-  boolean isPositionOccupied(Position)
-}
+    class FinishedGame {
+      Either<InProgressGame, NewGame> takeMoveBack()
+      boolean isPositionOccupied(Position)
+      Result whoWonOrDraw()
+    }
 
-class PlayerWon implements Result {
-  Player player;
-}
+    class PlayerWon implements Result {
+      Player player;
+    }
 
-class Draw implements Result {
-}
-```
+    class Draw implements Result {
+    }
+    ```
+1. 
+    ```
+    class NewGame:
+      def move(self, player, position):
+        // return either InProgressGame or FinishedGame
+    
+    class InProgressGame:
+      def move(self, player, position):
+        // return either InProgressGame or FinishedGame
+      def takeMoveBack(self):
+        // return either NewGame or InProgressGame
+      def isPositionOccupied(self, position):
+        // return boolean
+    
+    class FinishedGame:
+      def takeMoveBack(self):
+        // return either NewGame or InProgressGame
+      def isPositionOccupied(self, position):
+        // return boolean
+      def whoWonOrDraw(self):
+        // return PlayerWon or Draw
+    
+    class PlayerWon:
+      player
+    
+    class Draw:
+      pass
+    ```
+1. 
+    ```
+    TODO
+    ```
