@@ -258,3 +258,6 @@ TODO
         }
     }
     ```
+### Exercise 2
+
+Do the checks in the data layer. Instead of `user.getPhotos(db)` and then checking canView, change the API to be `user.getPhotos(viewingUser, db)`.
