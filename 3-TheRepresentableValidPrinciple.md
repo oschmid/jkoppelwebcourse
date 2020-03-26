@@ -146,3 +146,115 @@ TODO
     static Either<InProgressGame<Unoccupied, Occupied, Occupied, Occupied, Occupied, Occupied, Occupied, Occupied, Occupied>, NewGame> takeMoveBack(TopLeft, FinishedGame)
     // repeat for moveB, moveC, ...
     ```
+## Simpler and More Correct
+
+### Exercise 1
+
+1.
+    ```
+    public class Discount {
+        public static final String STUDENT = "student";
+        public static final String EMPLOYEE = "employee";
+        // ...
+        public boolean doesDiscountApply(Customer c, Item item) {
+            if (customerTypeDiscount != null) {
+                if (customerTypeDiscount.equals(STUDENT)) return c.isStudent();
+                else if (customerTypeDiscount.equals(EMPLOYEE)) return c.isEmployee();
+            }
+            // ...
+        }
+    }
+    ```
+1. 
+    ```
+    public class Discount {
+        private @NonNull CustomerTypeDiscount customerTypeDiscount;
+        // ...
+        public boolean doesDiscountApply(Customer c, Item item) {
+            switch (customerTypeDiscount) {
+                case STUDENT: return c.isStudent();
+                case EMPLOYEE: return c.isEmployee();
+                case NONE: break;
+            }
+            // ...
+        }
+    }
+    
+    public enum CustomerType {
+        STUDENT, EMPLOYEE, NONE
+    }
+    ```
+1. 
+    ```
+    public class Discount {
+        // ...
+        
+        private boolean doesDiscountApply(Customer c, Item item) {
+            // ...
+        }
+
+        public double applyDiscount(Customer c, Item item, double price) {
+            if (!doesDiscountApply(c, item)) return price;
+            return price * (1 - discountPercent);
+        }
+    }
+    ```
+1.
+    ```
+    public abstract Discount {
+        // ...
+        abstract boolean doesDiscountApply(Customer c, Item item);
+        // ...
+    }
+    
+    public class StudentDiscount extends Discount {
+        private final double discountPercent;
+        
+        boolean doesDiscountApply(Customer c, Item item) {
+            return c.isStudent();
+        }
+    }
+    
+    public class EmployeeDiscount extends Discount {
+        private final double discountPercent;
+        
+        boolean doesDiscountApply(Customer c, Item item) {
+            return c.isEmployee();
+        }
+    }
+    
+    public class ItemDiscount extends Discount {
+        private final String itemName;
+        private final double discountPercent;
+        
+        boolean doesDiscountApply(Customer c, Item item) {
+            return item.getName().equals(itemName);
+        }
+    }
+    
+    public class DayOfWeekDiscount extends Discount {
+        private final String dayOfWeek;
+        private final double discountPercent;
+        
+        boolean doesDiscountApply(Customer c, Item item) {
+            return DateUtils.getDayOfWeek().equals(dayOfWeek);
+        }
+    }
+    ```
+1. 
+    ```
+    public abstract Discount {
+        // ...
+        abstract boolean doesDiscountApply(Customer c, Item item, OffsetDateTime dateTime);
+        // ...
+    }
+    
+    public class DayOfWeekDiscount extends Discount {
+        private final DayOfWeek dayOfWeek;
+        private final double discountPercent;
+        
+        boolean doesDiscountApply(Customer c, Item item, OffsetDateTime dateTime) {
+            return dateTime.getDayOfWeek().equals(dayOfWeek);
+        }
+    }
+    ```
