@@ -25,8 +25,15 @@ https://gist.github.com/oschmid/3ee4c21525ef9082390ba469c897d7cf
    1. TODO Use “with self.open() as connection:”?
 1.
    1. Filepath must be a string, a directory, exist already or be creatable, and be writable. The file-based backend was designed to check on initialization that it could read/write data to the file system. The file based backend also backs onto individual files for each message and doesn’t have the concept of a single stream like other backends.
-   1. More backends could be developed that don’t have the concept of a single stream.
-   1. TODO
+   1. We might want to run these checks on message send rather than init or at another time.
+   1. 
+      ```
+      class WritableDirectory:
+         def __init__(self, file_path):
+            // do checks here
+      
+      // turn a string file path to a WritableDirectory at init time or execution time
+      ```
 1.
    1. | Header | __init__ | message() |
       |--------|----------|-----------|
