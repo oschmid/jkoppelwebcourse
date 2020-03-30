@@ -15,11 +15,7 @@ They would need to slowly release updates to their library over time with backwa
 
 ### Where to Draw the Boundary
 
-TODO
-
-### Optional: Evolving an Embedded Domain-Specific Language in Java
-
-TODO
+Well-designed data structures encapsulate true units of the program's reality and are easily evolved. Poorly-designed ones repeatedly hold back development and confuse other developers.
 
 ## Restricting APIs
 
