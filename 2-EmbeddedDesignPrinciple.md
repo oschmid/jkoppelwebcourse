@@ -21,8 +21,23 @@ https://gist.github.com/oschmid/3ee4c21525ef9082390ba469c897d7cf
 1. There is hidden coupling in the format of the message footer. Changing the message format requires knowing each of the locations messages can be written. To eliminate that I would create a single message wrapper class (or function) to deduplicate writing message bytes to a stream.
 1.
    1. try/except block with a conditional raise.
-   1. TODO
-   1. TODO Use “with self.open() as connection:”?
+   1. The SMTP backend can fail silently in either`open()` or `close()`. The console-based backend does nothing during open/close but can fail silently during `send_messages()`. Any changes to send_messages that could introduce new sources of exceptions needs to be wrapped in fail silently try/except blocks.
+   1. The base backend actually implements the `__enter__()` and `__exit__()` methods needed to create with statements. We can move our exception handling code into `__exit__()` and make sure to wrap calls to `send_messages()` inside with statements.
+      ```
+      def __exit__(self, exc_type, exc_value, traceback):
+         // if value is an error and self.fail_silently return true
+      
+      //...
+      
+      def send_messages(self, email_messages):
+         """
+         Call within a with statement to properly handle exceptions.
+         
+         with backend:
+            backend.send_messages(email_messages)
+         """
+         //...
+      ```
 1.
    1. Filepath must be a string, a directory, exist already or be creatable, and be writable. The file-based backend was designed to check on initialization that it could read/write data to the file system. The file based backend also backs onto individual files for each message and doesn’t have the concept of a single stream like other backends.
    1. We might want to run these checks on message send rather than init or at another time.
