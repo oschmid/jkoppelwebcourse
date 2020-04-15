@@ -13,7 +13,7 @@ TODO
 ### Dataflow Patterns
 
 1. In the alphabetize module, the function `def csword(shift, wordno, lines)` and in the output module, inside the function `def csline(shift, lines)`.
-1. ![Dataflow]()
+1. ![Dataflow](https://github.com/oschmid/jkoppelwebcourse/raw/master/4-DataOverCode-Dataflow.png)
 
 ## Case Study: Git
 
