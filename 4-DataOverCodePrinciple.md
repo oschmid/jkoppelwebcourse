@@ -10,7 +10,10 @@ TODO
 
 ## KWIC Refactoring Drill
 
-TODO
+### Dataflow Patterns
+
+1. In the alphabetize module, the function `def csword(shift, wordno, lines)` and in the output module, inside the function `def csline(shift, lines)`.
+1. ![Dataflow]()
 
 ## Case Study: Git
 
