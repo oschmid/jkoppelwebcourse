@@ -18,11 +18,12 @@ TODO
 
 ### Data-Centric Refactoring
 
-1. Input = TODO
-   Circular Shifter = TODO
-   Alphabetizing = TODO
-   Output = TODO
-   Master Control = TODO
+1.
+   - **Input** hides how to input data. Right now it's just a copy of a list of string lists but it could be expanded to reading from a terminal or other data source.
+   - **Circular Shifter** hides how and when lines are converted into circular shifts and how those circular shifts are stored.
+   - **Alphabetizing** hides how and when circular shifts are sorted, and the sort order.
+   - **Output** hides where to direct the output (e.g. terminal), and how lines are formatted.
+   - **Master Control** hides what data to load, and the order each operation is called.
 1. 
   1. All modules except Master Control would need to change as they all access `line_storage` directly. Preferably a new storage module would be created to hide how lines are stored (in-memory vs disk vs some future mechanism).
   1. TODO
