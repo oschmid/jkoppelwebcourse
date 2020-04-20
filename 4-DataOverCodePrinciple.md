@@ -25,9 +25,9 @@ TODO
    - **Output** hides where to direct the output (e.g. terminal), and how lines are formatted.
    - **Master Control** hides what data to load, and the order each operation is called.
 1. 
-  1. All modules except Master Control would need to change as they all access `line_storage` directly. Preferably a new storage module would be created to hide how lines are stored (in-memory vs disk vs some future mechanism).
-  1. TODO
-  1. TODO
+   1. All modules except Master Control would need to change as they all access `line_storage` directly. Preferably a new storage module would be created to hide how lines are stored (in-memory vs disk vs some future mechanism).
+   1. Master Control would need to change to not call `alphabetize()`, Alphabetize would need to change to use selection instead of sorting, and Output would need to change how it communicates with Alphabetize (instead of accessing `alph_index` directly).
+   1. Modules accesssing `circ_index` (Circular Shifter and Alphabetizing) would need to change to handle the new format.
 1. TODO
 1. TODO
 1. TODO
