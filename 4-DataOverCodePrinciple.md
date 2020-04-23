@@ -1,6 +1,6 @@
 ## Readings
 
-### On the Criteria to e Used in Decomposing Systems Into Modules
+### On the Criteria to be Used in Decomposing Systems Into Modules
 
 TODO some sort of hidden coupling?
 
