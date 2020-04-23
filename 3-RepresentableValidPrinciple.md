@@ -89,11 +89,11 @@ Well-designed data structures encapsulate true units of the program's reality an
 1. 
     ```
     // we could get most of the safety by having 'isPositionOccupied()' return a token needed 
-    // to for move() and 'takeMoveBack()'. The token would be of type Either<Occupied, Unoccupied> 
-    // and move() would accept Unoccupied and takeMoveBack() would accept Occupied. Both token 
+    // to call 'move()' and 'takeMoveBack()'. The token would be of type Either<Occupied, Unoccupied> 
+    // and 'move()' would accept only Unoccupied and 'takeMoveBack()' would accept only Occupied. Both token 
     // types have constructors private to the *Game types.
     // 
-    // But here's a way of getting true compile time guarrantee of only making valid moves
+    // But here's a way of getting true compile time guarrantee of only making valid moves:
     
     class NewGame {
     }
