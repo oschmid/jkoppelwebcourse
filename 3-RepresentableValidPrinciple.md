@@ -164,13 +164,19 @@ Well-designed data structures encapsulate true units of the program's reality an
 1. 
     ```
     public class Discount {
-        private @NonNull CustomerTypeDiscount customerTypeDiscount;
+        private @Nullable CustomerType customerType;
+        private @Nullable java.time.DayOfWeek dayOfWeek;
         // ...
         public boolean doesDiscountApply(Customer c, Item item) {
-            switch (customerTypeDiscount) {
-                case STUDENT: return c.isStudent();
-                case EMPLOYEE: return c.isEmployee();
-                case NONE: break;
+            if (customerType != null) {
+                switch (customerType) {
+                    case STUDENT: return c.isStudent();
+                    case EMPLOYEE: return c.isEmployee();
+                    case NONE: break;
+                }
+            }
+            if (dayOfWeek != null) {
+                return java.time.LocalDate.atStartOfDay().getDayOfWeek() == dayOfWeek;
             }
             // ...
         }
@@ -249,7 +255,7 @@ Well-designed data structures encapsulate true units of the program's reality an
         private final DayOfWeek dayOfWeek;
         private final double discountPercent;
         
-        boolean doesDiscountApply(Customer c, Item item, OffsetDateTime dateTime) {
+        boolean doesDiscountApply(Customer c, Item item, java.time.OffsetDateTime dateTime) {
             return dateTime.getDayOfWeek().equals(dayOfWeek);
         }
     }
