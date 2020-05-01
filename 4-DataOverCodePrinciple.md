@@ -19,11 +19,11 @@ TODO
 ### Data-Centric Refactoring
 
 1.
-   - **Input** hides how to input data. Right now it's just a copy of a list of string lists but it could be expanded to reading from a terminal or other data source.
-   - **Circular Shifter** hides how and when lines are converted into circular shifts and how those circular shifts are stored.
-   - **Alphabetizing** hides how and when circular shifts are sorted, and the sort order.
+   - **Input** hides the expected input format (currently a list of string lists).
+   - **Circular Shifter** hides nothing.
+   - **Alphabetizing** hides the sort order.
    - **Output** hides where to direct the output (e.g. terminal), and how lines are formatted.
-   - **Master Control** hides what data to load, and the order each operation is called.
+   - **Master Control** hides the example data, and the order each operation is called.
 1. 
    1. All modules except Master Control would need to change as they all access `line_storage` directly. Preferably a new storage module would be created to hide how lines are stored (in-memory vs disk vs some future mechanism).
    1. Master Control would need to change to not call `alphabetize()`, Alphabetize would need to change to use selection instead of sorting, and Output would need to change how it communicates with Alphabetize (instead of accessing `alph_index` directly).
@@ -33,8 +33,6 @@ TODO
    # STORAGE MODULE
    
    line_storage = None
-   circ_index = None
-   alph_index = None
    
    # Returns lines as an array
    def get_lines():
@@ -45,6 +43,11 @@ TODO
       global line_storage
       line_storage.extend(lines)
    
+   
+   # CIRCULAR SHIFTER MODULE
+   
+   circ_index = None
+   
    # Returns shifts as a list of (line, shift index) pairs
    def get_circ_index(shift, wordno):
       global circ_index
@@ -53,6 +56,11 @@ TODO
    def add_circ_shift(lineno, wordno):
       global circ_index
       circ_index.append((lineno, wordno))
+   
+   
+   # ALPHABETIZING MODULE
+   
+   alph_index = None
    
    # Returns shifts as alphabetized list of (line, shift index) pairs
    def get_alph_index():
@@ -65,9 +73,21 @@ TODO
       alph_index.extend(shifts)
       alph_index = sorted(alph_index, cmp=cmp_csline)
    ```
-1. TODO
-1. TODO
-1. TODO
+1.
+   ```python
+   # TODO
+   ```
+1. 
+   - **Storage** hides the format of`line_storage`
+   - **Input** hides the expected input format (currently a list of string lists).
+   - **Circular Shifter** hides the format of `circ_index`
+   - **Alphabetizing** hides the sort order and the format of `alph_index`.
+   - **Output** hides where to direct the output (e.g. terminal), and how lines are formatted.
+   - **Master Control** hides the example data, and the order each operation is called.
+1. 
+   1. Only Storage would need to change.
+   1. Alphabetizing and how it's accessed by Output would need to change.
+   1. Only Circular Shifter would need to change.
 
 ## Case Study: Git
 
