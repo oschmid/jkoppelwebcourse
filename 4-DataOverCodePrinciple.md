@@ -2,11 +2,25 @@
 
 ### On the Criteria to be Used in Decomposing Systems Into Modules
 
+Line Storage Module:
+   CHAR(r,w,c)
+   SETCHAR(r,w,c,d)
+Input Module:
+   ?
+Circular Shifter Module:
+   CSCHAR(l,w,c)
+   CSSETUP
+Alphabetizer Module:
+   ALPH
+   ITH(i)
+Output Module
+Master Control Module
+
 TODO some sort of hidden coupling?
 
 ### The Secret History of Information Hiding
 
-TODO
+TODO probably but can't remember one right now...
 
 ## KWIC Refactoring Drill
 
