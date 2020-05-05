@@ -128,3 +128,4 @@ TODO probably but can't remember one right now...
 ## Optional Design Exercise: Interactive Fiction
 
 https://gist.github.com/oschmid/f77c3650aabcf7bc2d8fb1ec4350e7af
+(TODO not quite finished all features)
