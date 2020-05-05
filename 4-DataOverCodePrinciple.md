@@ -105,7 +105,25 @@ TODO probably but can't remember one right now...
 
 ## Case Study: Git
 
-TODO
+### Worktrees
+
+1. `struct worktree` is in **worktree.h**
+1. `get_main_worktree(void)` in **worktree.c**
+1. `is_bare_repository(void)` in **environment.c** checks if the default repository is bare or if there is a worktree.
+
+### Submodules
+
+1. `struct submodule` is in **submodule-config.h**
+1. (see below)
+1. `submodule_from_name()` and `submodule_from_path()` in **submodule-config.c**
+1. `lookup_or_create_by_name()` in **submodule-config.c**
+1. `git_config_from_file()`, along with `git_config_from_file_with_options()`, `git_config_from_mem()`, `git_config_from_blob_oid()`, and `git_config_from_parameters()` in **config.c**
+1. `parse_config()` in **submodule-config.c**
+1. `repo->submodule_cache` is updated and TODO
+
+### Freestyle
+
+1. TODO
 
 ## Optional Design Exercise: Interactive Fiction
 
