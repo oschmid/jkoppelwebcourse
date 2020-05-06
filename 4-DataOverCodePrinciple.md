@@ -89,7 +89,10 @@ TODO probably but can't remember one right now...
    ```
 1.
    ```python
-   # TODO
+   def get_circshift(shift, wordno):
+      (lno, first_word_no) = shift
+      shift_idx = (first_word_no + word_no) % len(lines[lno])
+      return get_lines()[lno][shift_idx]
    ```
 1. 
    - **Storage** hides the format of`line_storage`
@@ -126,11 +129,17 @@ TODO probably but can't remember one right now...
 1. How are git stashes modeled?
    - `struct stash_info` contains the necessary git tree and commit objects to reconstruct the worktree and index, even untracked files. A base commit is also stored for merging file changes when popping from stash.
 1. How does git status find changed files?
-   - **wt-status.c** has several methods that recursively scan files `wt_status_collect_[changed|updated|changes_worktree|changes_index|changes_initial|untracked]`
+   - **wt-status.c** has several methods that recursively scan files
+    - `wt_status_collect_changed`
+    - `wt_status_collect_updated`
+    - `wt_status_collect_changes_worktree`
+    - `wt_status_collect_changes_index`
+    - `wt_status_collect_changes_initial`
+    - `wt_status_collect_untracked`
 1. What is a detached head state?
    - `is_detached` is a flag on `struct worktree` in **worktree.h**. I gave up searching through the code for what this actually meant and looked up some documentation. [This](https://www.git-tower.com/learn/git/faq/detached-head-when-checkout-commit) helped me to understand how it's the state of having checked out a commit directly without being on a specific branch. This kind of question is more abstract and less likely to be answered directly in code.
 
 ## Optional Design Exercise: Interactive Fiction
 
 https://gist.github.com/oschmid/f77c3650aabcf7bc2d8fb1ec4350e7af
-(TODO not quite finished all features)
+(TODO not quite finished all features so I'll resubmit when the optional exercises are due)
