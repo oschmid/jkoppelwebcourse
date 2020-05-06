@@ -119,7 +119,7 @@ TODO probably but can't remember one right now...
 1. `lookup_or_create_by_name()` in **submodule-config.c**
 1. `git_config_from_file()`, along with `git_config_from_file_with_options()`, `git_config_from_mem()`, `git_config_from_blob_oid()`, and `git_config_from_parameters()` in **config.c**
 1. `parse_config()` in **submodule-config.c**
-1. `repo->submodule_cache` is updated and TODO
+1. `repo->submodule_cache` and (judging by [documentation](https://git-scm.com/docs/gitsubmodules)) a file is written to .gitmodules and some submodule info is written to the git repo's config.
 
 ### Freestyle
 
