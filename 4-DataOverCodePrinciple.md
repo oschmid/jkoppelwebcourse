@@ -123,7 +123,12 @@ TODO probably but can't remember one right now...
 
 ### Freestyle
 
-1. TODO
+1. How are git stashes modeled?
+   - `struct stash_info` contains the necessary git tree and commit objects to reconstruct the worktree and index, even untracked files. A base commit is also stored for merging file changes when popping from stash.
+1. How does git status find changed files?
+   - **wt-status.c** has several methods that recursively scan files `wt_status_collect_[changed|updated|changes_worktree|changes_index|changes_initial|untracked]`
+1. What is a detached head state?
+   - `is_detached` is a flag on `struct worktree` in **worktree.h**. I gave up searching through the code for what this actually meant and looked up some documentation. [This](https://www.git-tower.com/learn/git/faq/detached-head-when-checkout-commit) helped me to understand how it's the state of having checked out a commit directly without being on a specific branch. This kind of question is more abstract and less likely to be answered directly in code.
 
 ## Optional Design Exercise: Interactive Fiction
 
