@@ -12,4 +12,4 @@
 
 ### Optional: Program Derivation for Functional Programs - Felienne Hermans
 
-TODO
+Insertion Sort is a special case of Quick Sort where you focus on inserting one element into a sorted list rather than merging 2 sorted lists.
