@@ -66,8 +66,11 @@ Insertion Sort is a special case of Quick Sort where you focus on inserting one 
 1. Conditional-to-function
    ```
    if (A) o.foo() else o.bar()
-   TODO
-   
+   [true/A](if (A) o.foo() else o.bar()), [false/A](if (A) o.foo() else o.bar())
+   if (true) o.foo() else o.bar(), if (false) o.foo() else o.bar()
+   o.foo(), o.bar()
+   f = (() -> o.foo()); f(), f = (() -> o.bar()); f()
+   [true/A](f = if (true) (() -> o.foo()) else (() -> o.bar())); f(), [false/A](f = if (false) (() -> o.foo()) else (() -> o.bar())); f()
    f = if (A) (() -> o.foo()) else (() -> o.bar()); f()
    ```
 1. Optional Bonus: Functoriality of Map
@@ -77,3 +80,18 @@ Insertion Sort is a special case of Quick Sort where you focus on inserting one 
    
    map((x) -> f(g(x)), l)
    ```
+
+## Mechanical Refactoring Drill
+
+### Algebraically Refactoring a Weak API
+
+1. TODO
+1. TODO
+1. TODO
+
+### Mechanically Refactoring a Weak API
+
+1. TODO
+1. TODO
+1. TODO
+1. TODO
