@@ -85,13 +85,88 @@ Insertion Sort is a special case of Quick Sort where you focus on inserting one 
 
 ### Algebraically Refactoring a Weak API
 
-1. TODO
-1. TODO
-1. TODO
+1. Every location that sets a "colour" will need to be changed to "color".
+1. `updateItem(self, key, value)` accepts keys that are not part of the ToDoItem definition (at least not that used by the constructor).
+1. `updateItem(self, key, value)` is of type `(S("dueDate"), Date) | (S("description"), String) | (S("status"), Status) | (S("colour"), Colour) | (S("isPublic"), boolean) -> None`.
+   We can split these up into individual setters:
+   ```
+   def updateDueDate(self, value):
+     setattr(self, "dueDate", value)
+   
+   def updateDescription(self, value):
+     setattr(self, "description", value)
+   
+   def updateStatus(self, value):
+     setattr(self, "status", value)
+   
+   def updateColour(self, value):
+     setattr(self, "colour", value)
+   
+   def updateIsPublic(self, value):
+     setattr(self, "isPublic", value)
+   ```
 
 ### Mechanically Refactoring a Weak API
 
-1. TODO
-1. TODO
-1. TODO
-1. TODO
+1. At a minimum, you could extract color depth and screen dimensions for each mode as static values and call them from the new print function. Even better though would be to create a `Mode` type to encapsulate those graphical settings and have small, medium, etc. as static values.
+1. Probably only that there are a set of magic keys ("small", "medium") which need to be passed in depending on the machine.
+1. 
+   ```
+   public class Mode {
+     int colorDepth;
+     Dimension dimension; // (x, y)
+   }
+   
+   final Mode small = new Mode(8, new Dimension(1024, 768));
+   final Mode medium = new Mode(16, new Dimension(1600, 1200));
+   
+   public void displayGame(Mode mode) {
+     setColorDepth(mode.colorDepth);
+     drawRect(screen, mode.dimension.x, mode.dimension.y);
+   }
+   ```
+1. 
+   1. Reverse substitution:
+      ```
+      public void displayGame(String mode) {
+        if (mode.equals("small")) {
+          displayGame(8, 1024, 768);
+        } else if (mode.equals("medium")) {
+          displayGame(16, 1600, 1200);
+        }
+      }
+      
+      private void displayGame(int depth, int x, int y) {
+        setColorDepth(depth);
+        drawRect(screen, x, y);
+      }
+      ```
+   1. Pull out the modes
+      ```
+      final String small = "small";
+      final String medium = "medium";
+      
+      public void displayGame(String mode) {
+        if (mode.equals(small)) {
+          displayGame(8, 1024, 768);
+        } else if (mode.equals(medium)) {
+          displayGame(16, 1600, 1200);
+        }
+      }
+
+      private void displayGame(int depth, int x, int y) {
+        setColorDepth(depth);
+        drawRect(screen, x, y);
+      }
+      ```
+   1. Substitute a tuple for the string
+      ```
+      final Tuple small = (8, 1024, 768);
+      final Tuple medium = (8, 1600, 1200);
+      
+      public void displayGame(Tuple mode) {
+        setColorDepth(mode.a);
+        drawRect(screen, mode.b, mode.c);
+      }
+      ```
+   1. Finally substitute a record type for the tuple (see answer 3).
