@@ -3,12 +3,12 @@
 ### The Algebra of Algebraic Datatypes, Part 1 - Chris Taylor
 
 1.
-  ```
-  (int + string) -> bool
-  Using a product rule we get 2 functions:
-    int -> bool
-    string -> bool
-  ```
+   ```
+   (int + string) -> bool
+   Using a product rule we get 2 functions:
+     int -> bool
+     string -> bool
+   ```
 
 ### Optional: Program Derivation for Functional Programs - Felienne Hermans
 
@@ -170,3 +170,13 @@ Insertion Sort is a special case of Quick Sort where you focus on inserting one 
       }
       ```
    1. Finally substitute a record type for the tuple (see answer 3).
+
+## Case Study: A Tale of Two Parsers
+
+### Data Modeling
+
+TODO
+
+### Code follows data
+
+TODO
