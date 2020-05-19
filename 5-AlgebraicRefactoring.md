@@ -175,8 +175,28 @@ Insertion Sort is a special case of Quick Sort where you focus on inserting one 
 
 ### Data Modeling
 
-TODO
+1. 
+   ```
+   type Primitive
+      = BooleanP
+      | ByteP
+      | CharP
+      | DoubleP
+      | FloatP
+      | IntP
+      | LongP
+      | ShortP
+   ```
+1. TODO
+1. TODO
+1. TODO
+1. TODO
+1. TODO
+1. TODO
 
 ### Code follows data
 
-TODO
+1. Needing to call `getAST().newPrefixExpression()` or `getAST().newPostfixExpression()` depending on the type.
+1. TODO
+1. TODO
+1. TODO
