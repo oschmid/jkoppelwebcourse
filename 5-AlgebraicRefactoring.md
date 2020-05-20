@@ -177,26 +177,50 @@ Insertion Sort is a special case of Quick Sort where you focus on inserting one 
 
 1. 
    ```
-   type Primitive
+   Primitive
       = BooleanP
-      | ByteP
-      | CharP
-      | DoubleP
-      | FloatP
-      | IntP
-      | LongP
-      | ShortP
+      + ByteP
+      + CharP
+      + DoubleP
+      + FloatP
+      + IntP
+      + LongP
+      + ShortP
    ```
-1. TODO
-1. TODO
-1. TODO
-1. TODO
-1. TODO
-1. TODO
+1. Javaparser's PrimitiveType: `(Primitive, NodeList<AnnotationExpr>)`
+1. JDT's PrimitiveType: `(List<Annotation>, byte + short + char + int + long + float + double + boolean + void)`
+1. JDT's implementation contains a value whereas Javaparser's may not (it was hard to tell from the docs). JDT's also used static instance objects for `Code` rather than an enum but those are essentially the same. JDT's Code has a void value whereas Javaparser's Primitive does not.
+1. 
+   ```
+   // JDT
+   Type
+      = (Code
+        , ArrayType (Dimension, List<Dimension>)
+        + UnionType (List<Type>)
+        + AnnotatableType (List<Annotation>, Primitive + SimpleType (TypeName) )
+        )
+   ```
+1. 
+   ```
+   // Javaparser
+   Type = (Primitive, NodeList<AnnotationExpr>, PrimitiveType + ReferenceType + UnionType + UnknownType + VoidType)
+   ```
+1. We can use reverse substitution to make each of JDT's types have a list of annotations (non-annotatable types will have empty lists).
+   ```
+   // JDT
+   Type
+      = (Code
+        , List<Annotation>
+        , ArrayType (Dimension, List<Dimension>)
+        + UnionType (List<Type>)
+        + PrimitiveType
+        + SimpleType (TypeName)
+        )
+   ```
 
 ### Code follows data
 
 1. Needing to call `getAST().newPrefixExpression()` or `getAST().newPostfixExpression()` depending on the type.
-1. TODO
+1. TODO I don't think I understood the first part of this case study well enough to answer the rest of these questions.
 1. TODO
 1. TODO
