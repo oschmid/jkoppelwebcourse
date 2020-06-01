@@ -32,9 +32,26 @@ It would have greatly reduced the size and complexity of the serialization and d
 
 ### Complexity Ratchets
 
-1. TODO
-1. TODO
-1. TODO
+1. 
+   1. ```(string, uint32, byte, uint32, uint32, 1, List (0 + 1, int32, int32))```
+   1. ```(string, uint32, byte, uint32, uint32, 2, 1, List(0 + 1, float, float))```
+   1. ```(string, uint32, byte, uint32, uint32, 3, 1, uint32, List(0 + 1, float, float))```
+1. 3 is a subtype of 2. The only difference is the version (and any functionality related to the tattoo field which wouldn't be used).
+1. 
+   ```
+   (string, uint32, byte, uint32, uint32, uint32, List(0 + 1))
+   
+   destructor:
+     delete string name
+     delete uint32 linked
+     delete byte state
+     delete uint32 closed
+     delete uint32 np
+     delete uint32 version
+     for (i = 0; i < np; i++) {
+        delete int32 type
+     }
+   ```
 1. TODO
 1. TODO
 
