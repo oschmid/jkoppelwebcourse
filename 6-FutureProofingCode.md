@@ -20,10 +20,10 @@ It would have greatly reduced the size and complexity of the serialization and d
 
 ### Assumptions
 
-1. TODO
+1. It looks like they got locked in to the choice of `gdouble` to represent opacity rather than a `gboolean`. That may have let them reused the code for indexing RGB colors to also index alphas. But it broke the 1-to-1 representational relationship between a boolean transparent/opaque design and the actual data type.
 1. You need a version flag that says whether to treat it the old way (no semitransparency) or the new way (with semitransparency) and leave room for future versions with say a larger range of transparency values for example.
 1. You'd expect for those with transparency values <50% to be fully transparent and those with values >=50% to be fully opaque.
-1. TODO
+1. When semitransparency was not supported the file format should have stored it as a boolean transparent/opaque rather than a byte with 256 different possible values. This would have forced a newer file version to use a different property key and value type to store semitransparent ranges.
 
 ### Openness
 
