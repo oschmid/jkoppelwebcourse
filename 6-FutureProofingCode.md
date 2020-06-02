@@ -77,5 +77,5 @@ It would have greatly reduced the size and complexity of the serialization and d
 
 #### Bonus
 
-1. TODO
-1. TODO
+1. Since it has a version field new fields can be added without breaking forward-compatibility. However fields can't be removed or changed to different types. TODO
+1. If individual paths need versions, the whole property probably needs versions.
