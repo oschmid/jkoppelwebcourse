@@ -27,8 +27,11 @@ It would have greatly reduced the size and complexity of the serialization and d
 
 ### Openness
 
-1. TODO
-1. TODO
+1. The image header has a `property-list` datastructure in which to store new properties. This makes the format open in the set of properties. Properties also need a type field to make them identifiable.
+1.
+   1. PROP_COLORMAP is not open in the list of fields. There is no version number. To add new fields would require a new field type PROP_COLORMAP_WITH_VERSION with a version field (or named fields) that would be open to further field additions or format changes.
+   1. PROP_COLOR is not open in the list of fields. That's why it was replaced by a new type PROP_FLOAT_COLOR. Since this new property also lacks a version number (or named fields) it took will need to be replaced should it need changing.
+
 
 ### Complexity Ratchets
 
@@ -52,8 +55,25 @@ It would have greatly reduced the size and complexity of the serialization and d
         delete int32 type
      }
    ```
-1. TODO
-1. TODO
+1. The non-existence of keys for each property makes the only identifiable difference the version number which forces if statements.
+1. A map of named properties:
+   ```
+   "name": string
+   "linked": uint32
+   "state": byte
+   "closed": uint32
+   "np": uint32
+   "version": uint32
+   "dummy": uint32 (version >=2)
+   "tattoo": uint32 (version >=3)
+   "points": List of:
+      "type": int32
+      "x": int32 (version <=1)
+      "y": int32 (version <=1)
+      "x_float": float (version >=2)
+      "y_float": float (version >=2)
+   ```
+   For formats 2 and 3 to be a subtype of 1 they would have to round x and y coordinates to the nearest integer. Pre-1999 GIMP could then skip properties of newer formats and new GIMP could convert x and y coordinates from int to float based on name.
 
 #### Bonus
 
