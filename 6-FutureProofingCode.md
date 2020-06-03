@@ -2,15 +2,11 @@
 
 ### Designing Software for Ease of Extension and Contraction - David Parnas
 
-TODO
+Refactoring a webapp I've been working on to sequester assumptions made adding new features easier.
 
 ### Martian Headsets - Joel Spoelsky
 
 If you're writing something new don't "be liberal in what you accept". It'll bite you in the long run. If you're updating something make sure to keep it backwards compatible or update all the callers of your function.
-
-### Gay Marriage: The Database Engineering Perspective - qntm
-
-TODO
 
 ### Optional: Why are the Microsoft API Formats So Complicated - Joel Spoelsky
 
@@ -77,5 +73,5 @@ It would have greatly reduced the size and complexity of the serialization and d
 
 #### Bonus
 
-1. Since it has a version field new fields can be added without breaking forward-compatibility. However fields can't be removed or changed to different types. TODO
+1. The version field makes it more open. New fields can be added without breaking forward-compatibility. However fields can't be removed or changed to different types.
 1. If individual paths need versions, the whole property probably needs versions.
