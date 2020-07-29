@@ -141,5 +141,4 @@ TODO probably but can't remember one right now...
 
 ## Optional Design Exercise: Interactive Fiction
 
-https://gist.github.com/oschmid/f77c3650aabcf7bc2d8fb1ec4350e7af
-(TODO not quite finished all features so I'll resubmit when the optional exercises are due)
+https://gist.github.com/oschmid/88f1e2fafd852c7be4abb4ed1eb1b2cf
